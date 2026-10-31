@@ -6,10 +6,10 @@ Desktop Companion Assistant is a desktop companion for the Quectel PI M2 (RK3576
 
 ## Features
 
-- A draggable VRM companion with continuous conversation, speech animation, and a switchable studio or transparent background.
-- Optional Bailian speech recognition, language-model replies, and speech synthesis. Credentials are kept in a local `.env` file.
-- On-demand hand preview and gesture recognition. The Linux launcher uses the RK3576 NPU by default; the camera and model are opened only while the preview is active.
-- Optional microphone-array direction tracking.
+- **Desktop companion**: A draggable VRM character with switchable transparent-overlay and 3D studio backgrounds.
+- **Voice conversation**: Bailian speech recognition, AI replies, and speech synthesis, with continuous dialogue and click-to-interrupt controls. The character displays speech-driven mouth movements and expressions.
+- **Gesture interaction**: The RK3576 NPU is used by default to detect hand landmarks, with a hand-skeleton overlay in the preview. Vertical swipes adjust only the assistant's speech volume. The camera and models start on demand and are released when the preview is closed.
+- **Sound-direction tracking**: A microphone array estimates the sound direction and turns the character's head toward it. Direction tracking can be disabled as needed.
 
 ## Hardware Requirements
 
