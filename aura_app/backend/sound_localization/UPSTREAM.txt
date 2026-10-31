@@ -1,0 +1,12 @@
+Source: https://github.com/Quectel-Pi/demo-sound-localization
+Commit: cf149db45f4e5f7ef36e3e510e2bc4558003c9b1
+Files imported: audio.py, localization.py, speech.py
+Local change: audio.py drains ALSA output on a separate bounded capture thread,
+uses explicit ALSA buffer/period durations and reports process exit status.
+On queue overflow it drops stale pending blocks and tags a discontinuity;
+sound_direction.py resets inference history and cancels any in-flight phrase.
+
+Only the capture, GCC-PHAT/SRP and WebRTC VAD core is included.
+No UI, ASR implementation or model is included.
+The upstream checkout did not contain a standalone LICENSE file.
+Confirm permission with the upstream author before redistribution or commercial use.

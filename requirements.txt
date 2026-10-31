@@ -1,0 +1,16 @@
+# CPython 3.11 on Linux aarch64; the legacy solutions API is required.
+fastapi
+uvicorn[standard]
+mediapipe==0.10.18
+opencv-contrib-python==4.11.0.86
+numpy<2
+webrtcvad-wheels==2.0.14
+openai
+dashscope>=1.25,<2
+python-dotenv
+pypinyin>=0.55,<1
+cmudict>=1.1,<2
+SpeechRecognition
+pyttsx3
+rknn-toolkit-lite2==2.3.2
+# Optional: PyAudio requires portaudio19-dev.

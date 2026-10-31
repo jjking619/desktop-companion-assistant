@@ -1,0 +1,17 @@
+{
+  "format": "aura-hand-rknn-v1",
+  "target": "rk3576",
+  "source": "https://github.com/opencv/opencv_zoo/tree/48b10fa505aeb51fbd127fc60a5c660040e823b7/models",
+  "precision": "FP16",
+  "input": "uint8 RGB NHWC; runtime mean=0 std=255",
+  "palm": {
+    "file": "palm-rk3576.rknn",
+    "sha256": "f2d0ea9bb0f176b562d37d958f49819b9d6acde56e2fb156c74346d1b19dfb37",
+    "source_sha256": "78ff51c38496b7fc8b8ebdb6cc8c1abb02fa6c38427c6848254cdaba57fcce7c"
+  },
+  "hand": {
+    "file": "hand-rk3576.rknn",
+    "sha256": "61eda681566eb03a2421574bbe80e5cac6ffb826cdd629b582753bfa9630406c",
+    "source_sha256": "db0898ae717b76b075d9bf563af315b29562e11f8df5027a1ef07b02bef6d81c"
+  }
+}

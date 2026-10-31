@@ -1,0 +1,18 @@
+Current live 3D companion: AvatarSample_A.vrm
+
+Source model: AvatarSample_A, distributed with VRoid Studio.
+Download: https://github.com/madjin/vrm-samples/blob/master/vroid/stable/AvatarSample_A.vrm
+Conditions of use: https://vroid.pixiv.help/hc/en-us/articles/4402394424089
+Source repository licensing notes: https://github.com/madjin/vrm-samples#license
+SHA-256: b86b0b8a66d48911431d6f920a5211a974226f83aa672eca3f3dfade58ac346e
+The local AvatarSample_A.vrm is used unchanged from this source model.
+Embedded title: AvatarSample_A
+Embedded author: VRoid; embedded license: Other; no additional license URL.
+The source repository identifies AvatarSample_A/B/C as models with particular
+conditions of use, not CC0 models. Consult the official conditions before using,
+modifying, or redistributing the model or builds that contain it. These artwork
+permissions are separate from the application's software license.
+
+Current walking motion: RobotExpressive by Tomas Laulhe / Quaternius, CC0 1.0,
+glTF conversion/modifications by Don McCurdy. The clip is retargeted at 45%
+amplitude. Motion attribution is separate from the application's software license.
