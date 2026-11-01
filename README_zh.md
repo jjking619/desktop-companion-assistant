@@ -2,7 +2,7 @@
 
 [English](README.md) | 中文
 
-桌面陪伴助手面向 Quectel PI M2（RK3576、Debian ARM64），集成 Electron 悬浮界面、VRM 人物、语音对话、按需手势识别和麦克风阵列声源定位。
+桌面陪伴助手基于 Quectel PI M2 智能主控板（RK3576、Debian ARM64）开发，集成 Electron 悬浮界面、VRM 人物、语音对话、按需手势识别和麦克风阵列声源定位。
 
 ![桌面陪伴助手界面预览](asset/menu.png)
 
@@ -16,7 +16,7 @@
 
 ## 硬件要求
 
-- Quectel PI M2 单板电脑，Debian ARM64。
+- Quectel PI M2 智能主控板（RK3576、Debian ARM64）。
 - 已登录且可访问的 X11 桌面；仅运行后端不需要图形桌面。
 - 手势预览需要 USB 摄像头。
 - 语音对话需要麦克风输入和音频输出；声源跟随功能才需要麦克风阵列。关闭声源定位后，可使用 USB 摄像头麦克风录音。使用 `arecord -l` 查看录音设备。
