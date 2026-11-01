@@ -2,7 +2,7 @@
 
 [English](README.md) | 中文
 
-桌面陪伴助手面向 Quectel PI M2智能主控板，集成 Electron 悬浮界面、VRM 人物、语音对话、按需手势识别和麦克风阵列声源定位。
+桌面陪伴助手面向 Quectel PI M2（RK3576、Debian ARM64），集成 Electron 悬浮界面、VRM 人物、语音对话、按需手势识别和麦克风阵列声源定位。
 
 ## 功能特性
 
@@ -11,12 +11,14 @@
 - **手势交互**：默认使用 RK3576 NPU 识别手部关键点，预览中显示手部骨架；上下滑动可调节助手自身的语音音量。摄像头和模型按需启动，关闭预览后释放资源。
 - **声源跟随**：通过麦克风阵列估计声源方向，驱动人物头部转向；可按需关闭声源定位。
 
+![桌面陪伴助手界面预览](asset/menu.png)
+
 ## 硬件要求
 
 - Quectel PI M2 单板电脑，Debian ARM64。
 - 已登录且可访问的 X11 桌面；仅运行后端不需要图形桌面。
 - 手势预览需要 USB 摄像头。
-- 语音功能需要麦克风阵列和音频输出设备。可用 `arecord -l` 查看录音设备。
+- 语音对话需要麦克风输入和音频输出；声源跟随功能才需要麦克风阵列。关闭声源定位后，可使用 USB 摄像头麦克风录音。使用 `arecord -l` 查看录音设备。
 
 ## 软件环境
 
@@ -91,14 +93,16 @@
 
    启动脚本会在启动 Electron 界面时构建前端。
 
-6. 如需使用百炼语音服务，复制配置示例。该示例使用百炼，请在启动前填入有效 API Key，并根据 `arecord -l` 核对麦克风设备：
+6. 如需使用百炼语音服务，复制配置示例。该示例使用百炼，请填入有效 API Key，并将 `AURA_MIC_DEVICE` 设置为 `arecord -l` 中实际存在的录音设备：
 
    ```bash
    cp aura_app/backend/bailian.env.example .env
    chmod 600 .env
    ```
 
-   使用本地编辑器修改 `.env`，设置 `DASHSCOPE_API_KEY`。
+   使用本地编辑器修改 `.env`，设置 `DASHSCOPE_API_KEY` 和 `AURA_MIC_DEVICE`。
+
+   如果连接了麦克风阵列，启动脚本默认开启声源定位，语音识别也会使用阵列设备（`AURA_SOUND_DEVICE`，默认 `hw:MicArray,0`）。没有阵列时，启动时关闭声源定位，语音识别才会改用 `.env` 中的 `AURA_MIC_DEVICE`。
 
 7. 下载 [madjin/vrm-samples 的 AvatarSample_A.vrm](https://github.com/madjin/vrm-samples/blob/master/vroid/stable/AvatarSample_A.vrm)，保留原始文件名，无需改名：
 
@@ -127,14 +131,13 @@ demo-desktop-companion-assistant/
 ├── requirements.txt             # Python 依赖
 ├── README.md                    # 英文说明（GitHub 默认展示）
 ├── README_zh.md                 # 中文说明
-└── LICENSE
 ```
 
 `.env` 和 `AvatarSample_A.vrm` 是本地文件，按设计不会提交到 Git。
 
 ## 运行程序
 
-在已登录的桌面终端中启动 Electron 界面：
+在已登录的 GNOME 桌面终端中启动 Electron 界面：
 
 ```bash
 cd ~/demo-desktop-companion-assistant
@@ -143,10 +146,25 @@ cd ~/demo-desktop-companion-assistant
 
 启动脚本会构建前端、启动后端并打开透明陪伴窗口。在启动终端按 `Ctrl+C` 停止。
 
+默认配置会开启麦克风阵列声源定位；如果没有连接阵列，请在启动时关闭：
+
+```bash
+AURA_SOUND_LOCALIZATION=0 ./StartAURA_Linux.sh
+```
+
+此时语音识别会使用 `.env` 中的 `AURA_MIC_DEVICE`。声源定位开启时则使用阵列设备；仅修改 `AURA_MIC_DEVICE` 无法解决缺少阵列导致的错误。
+
+Electron 需要从已登录的桌面会话终端启动。SSH 终端通常没有桌面 X11/Xwayland 授权；无桌面远程运行请使用 `--backend-only`，不要照搬其他会话的显示授权变量。
+
 如只需运行后端（无需 X11 或 Electron）：
 
 ```bash
-./StartAURA_Linux.sh --backend-only
+AURA_SOUND_LOCALIZATION=0 ./StartAURA_Linux.sh --backend-only
+```
+
+上面命令会在本次启动中关闭阵列声源定位；已连接并配置阵列时可去掉前缀。在另一个终端中验证 API：
+
+```bash
 curl --fail http://127.0.0.1:8000/
 ```
 
@@ -160,6 +178,8 @@ curl --fail http://127.0.0.1:8000/
 | `AURA_GESTURE_VOLUME` | `1` | 允许上下滑动调整桌面陪伴助手的语音音量；设为 `0` 关闭。仅打开手势预览后才会启动识别。 |
 | `AURA_CAMERA` | 第一个 `/dev/v4l/by-id/*-video-index0` 设备 | 指定摄像头设备。 |
 | `AURA_SOUND_LOCALIZATION` | `1` | 开启麦克风阵列声源定位；设为 `0` 关闭。 |
+| `AURA_SOUND_DEVICE` | `hw:MicArray,0` | 声源定位开启时用于定位和语音采集的阵列输入设备。 |
+| `AURA_MIC_DEVICE` | `.env` 中设置 | 关闭声源定位后，用作语音采集的普通麦克风设备。 |
 | `AURA_SOFTWARE_RENDERING` | `0` | 默认使用 Mali GPU；显式设为 `1` 使用软件渲染。 |
 | `AURA_ALSA_DEVICE` | 板载扬声器设备 | 指定 ALSA 输出设备。设为空值时，在可用情况下使用 PipeWire/PulseAudio。 |
 
@@ -180,13 +200,16 @@ AURA_GESTURE_VOLUME=0 ./StartAURA_Linux.sh
 - **提示缺少 Python 环境或找不到 `python3.11`：** 使用 `uv python install 3.11`，再按上文创建虚拟环境并安装 `requirements.txt`。不使用 Debian 13 的系统 Python 版本。
 - **找不到 `uv`：** 将 `~/.local/bin` 加入 `PATH`，或重新运行上文的官方安装命令。
 - **找不到 `node` 或 `npm`：** 将 `$HOME/.local/opt/node-v22.16.0-linux-arm64/bin` 加入 `PATH`，或重新执行 Node.js 安装步骤。Electron 模式还需要 `x11-utils` 和已登录的桌面会话；无桌面时使用 `--backend-only`。
+- **安装 uv 时连接被重置：** 检查网络后重试安装命令；临时下载失败不代表需要更换 Python 版本。
 - **SSH 克隆失败：** 在开发板配置 GitHub SSH Key；若仓库公开，也可改用 HTTPS 克隆地址。
-- **没有麦克风输入：** 使用 `arecord -l` 检查设备，并在 `.env` 中调整 `AURA_MIC_DEVICE`。使用阵列声源定位时，还需检查板端阵列设备及 `AURA_SOUND_DEVICE`。
+- **启动时报 MicArray / 声源定位错误：** 启动脚本默认开启阵列定位。请连接阵列并用 `arecord -l` 检查设备，必要时设置 `AURA_SOUND_DEVICE`；没有阵列时使用 `AURA_SOUND_LOCALIZATION=0 ./StartAURA_Linux.sh`。
+- **语音识别仍尝试打开 MicArray：** 声源定位开启时，ASR 使用 `AURA_SOUND_DEVICE`；`AURA_MIC_DEVICE` 只在关闭定位时生效。请用 `AURA_SOUND_LOCALIZATION=0 ./StartAURA_Linux.sh` 重启以使用普通麦克风。
 - **RKNN 预览加载失败：** 确认 `aura_app/backend/models/rknn/` 中存在模型及 `manifest.json`，并检查后端错误信息。模型需要 RK3576 运行时。
+- **警告说明：** `npm ci` 即使成功，也可能显示依赖弃用或 `npm audit` 提示；安全审计发现应单独查看，不要对锁定依赖盲目运行 `npm audit fix`。静态 shape RKNN 模型的 dynamic-range 查询警告和 Electron VSync 警告也曾在功能正常时出现；如果对应功能确实异常，再进一步排查。
 - **人物未显示：** 确认本地 VRM 文件位于上文路径，且文件名准确为 `AvatarSample_A.vrm`。
 
 反馈问题时请附上板卡型号、操作系统、启动命令和相关错误信息。分享日志前请移除 API Key 等敏感信息。
 
-## 许可证
+## 第三方素材许可
 
-项目许可证见 [LICENSE](LICENSE)。仓库内的 RKNN 模型和人物素材可能适用不同授权；重新分发前请保留对应许可证/署名文件并核实授权条件。
+第三方模型和人物素材各自适用不同许可。重新分发前请保留随附的模型许可证和署名，并核对上游使用条件。
