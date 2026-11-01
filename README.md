@@ -214,3 +214,7 @@ For issues, include the board model, operating system, startup command, and rele
 ## Third-Party Licenses
 
 Third-party models and character assets have their own licensing terms. Retain the accompanying model license and attribution files, and check the upstream terms before redistribution.
+
+## Reporting Issues
+
+For project bugs or feature requests, [open an issue](https://github.com/jjking619/demo-desktop-companion-assistant/issues). Include your board model, operating system, reproduction steps, startup command, and relevant error logs or screenshots. Remove API keys and other sensitive information before posting. For Quectel Pi board or platform support, visit the [Quectel Pi Forum](https://forumschinese.quectel.com/c/quectel-pi/58). Pull requests for improvements are welcome.
