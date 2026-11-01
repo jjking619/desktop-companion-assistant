@@ -16,7 +16,7 @@ Desktop Companion Assistant is a desktop companion for the Quectel PI M2 Smart S
 
 ## Hardware Requirements
 
-- Quectel PI M2 Smart Single-Board Computer  and Debian ARM64.
+- Quectel PI M2 Smart Single-Board Computer running Debian ARM64.
 - A logged-in desktop with an accessible X11 display for the Electron interface. Backend-only mode does not require a graphical desktop.
 - USB camera for gesture preview.
 - Audio input and output for voice conversation. A microphone array is required only for sound-direction tracking; a USB or camera microphone can be used for speech when tracking is disabled. Check devices with `arecord -l`.
