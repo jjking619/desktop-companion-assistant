@@ -4,6 +4,8 @@
 
 Desktop Companion Assistant is a desktop companion for the Quectel PI M2 (RK3576, Debian ARM64). It combines a transparent Electron interface, a VRM character, voice conversation, on-demand hand-gesture recognition, and microphone-array direction tracking.
 
+![Desktop Companion Assistant interface preview](asset/menu.png)
+
 ## Features
 
 - **Desktop companion**: A draggable VRM character with switchable transparent-overlay and 3D studio backgrounds.
@@ -11,7 +13,6 @@ Desktop Companion Assistant is a desktop companion for the Quectel PI M2 (RK3576
 - **Gesture interaction**: The RK3576 NPU is used by default to detect hand landmarks, with a hand-skeleton overlay in the preview. Vertical swipes adjust only the assistant's speech volume. The camera and models start on demand and are released when the preview is closed.
 - **Sound-direction tracking**: A microphone array estimates the sound direction and turns the character's head toward it. Direction tracking can be disabled as needed.
 
-![Desktop Companion Assistant interface preview](asset/menu.png)
 
 ## Hardware Requirements
 
