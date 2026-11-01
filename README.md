@@ -217,4 +217,4 @@ Third-party models and character assets have their own licensing terms. Retain t
 
 ## Reporting Issues
 
-For project bugs or feature requests, [open an issue](https://github.com/jjking619/demo-desktop-companion-assistant/issues). Include your board model, operating system, reproduction steps, startup command, and relevant error logs or screenshots. Remove API keys and other sensitive information before posting. For Quectel Pi board or platform support, visit the [Quectel Pi Forum](https://forumschinese.quectel.com/c/quectel-pi/58). Pull requests for improvements are welcome.
+For project bugs or feature requests, [open an issue](https://github.com/jjking619/demo-desktop-companion-assistant/issues). Include your board model, operating system, reproduction steps, startup command, and relevant error logs or screenshots. Remove API keys and other sensitive information before posting. For Quectel Pi board or platform support, visit the [Quectel Pi Forum](https://forums.quectel.com/c/quectel-pi/80). Pull requests for improvements are welcome.

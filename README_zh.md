@@ -215,4 +215,4 @@ AURA_GESTURE_VOLUME=0 ./StartAURA_Linux.sh
 
 ## 问题反馈
 
-如遇到项目功能问题或有改进建议，请到 [GitHub Issues](https://github.com/jjking619/demo-desktop-companion-assistant/issues) 提交 Issue。请尽量附上板卡型号、操作系统、复现步骤、启动命令及相关错误日志或截图；发布前请移除 API Key 等敏感信息。Quectel Pi 板卡或平台相关问题，也可以前往 [Quectel Pi 官方论坛](https://forumschinese.quectel.com/c/quectel-pi/58)咨询。欢迎通过 Pull Request 贡献改进。
+如遇到项目功能问题或有改进建议，请到 [GitHub Issues](https://github.com/jjking619/demo-desktop-companion-assistant/issues) 提交 Issue。请尽量附上板卡型号、操作系统、复现步骤、启动命令及相关错误日志或截图；发布前请移除 API Key 等敏感信息。Quectel Pi 板卡或平台相关问题，也可以前往 [Quectel Pi 官方论坛](https://forums.quectel.com/c/quectel-pi/80)咨询。欢迎通过 Pull Request 贡献改进。
